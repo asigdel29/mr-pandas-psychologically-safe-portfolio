@@ -77,13 +77,9 @@ def main() -> int:
     img = Image.alpha_composite(img, Image.fromarray(sa, "RGBA"))
     d = ImageDraw.Draw(img)
 
-    # 2b. yellow tail-fin logo: a stylised swoosh blob on the fin (upper-left).
-    fin = Image.new("RGBA", img.size, (0, 0, 0, 0))
-    fd = ImageDraw.Draw(fin)
-    fd.pieslice([2470, 2560, 2640, 2760], start=20, end=300, fill=(*YELLOW, 255))
-    fa = np.array(fin)
-    fa[..., 3] = np.where(full, fa[..., 3], 0)
-    img = Image.alpha_composite(img, Image.fromarray(fa, "RGBA"))
+    # (A yellow tail-fin emblem was attempted but the fin is a thin diagonal
+    # that's hard to place without a live render; deferred. The swoosh + navy +
+    # bold text already give the Buddha Air read.)
 
     # 3. bold "Kathmandu Air"
     font = ImageFont.truetype(FONT, FONT_PX)
