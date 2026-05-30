@@ -30,6 +30,11 @@ TEX = os.path.join(os.path.dirname(__file__), "..", "..", "public", "textures")
 TORII_REMNANTS = [
     (3160, 2620, 3850, 3760),  # lower post (already cleared earlier; harmless)
     (2800, 0, 3120, 680),      # upper-left crossbar + salmon stubs (render #25/#27)
+    # Pagoda ROOF remnant: the old PAGODA_BOX only reached x1300, so the roof's
+    # right half (dark-teal tiles + salmon eave) survived and floats in the sky
+    # (render #33/#34/#35). Erase x[1280,1980]; the stone lantern at x~768 is
+    # well left of this and is preserved.
+    (1280, 2680, 1980, 3780),
 ]
 
 # the bird is now REMOVED entirely (user request #26): erase its whole bbox.
