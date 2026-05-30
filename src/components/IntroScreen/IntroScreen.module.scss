@@ -2,11 +2,11 @@
   position: fixed;
   top: 0;
   left: 0;
-  background: rgb(247, 192, 83);
+  background: rgb(207, 227, 255);
   height: 100vh;
   width: 100vw;
   z-index: 100;
-  color: rgb(126, 85, 2);
+  color: rgb(18, 58, 107);
 }
 
 .introScreenContent {
@@ -24,14 +24,14 @@
 .progressBarContainer {
   width: 200px;
   height: 8px;
-  background-color: rgba(126, 85, 2, 0.3);
+  background-color: rgba(18, 58, 107, 0.3);
   border-radius: 4px;
   overflow: hidden;
 }
 
 .progressBar {
   height: 100%;
-  background-color: rgb(126, 85, 2);
+  background-color: rgb(18, 58, 107);
   transition: width 0.3s ease-in;
   border-radius: 4px;
 }

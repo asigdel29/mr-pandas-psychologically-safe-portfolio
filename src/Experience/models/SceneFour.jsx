@@ -5,7 +5,7 @@ import { useFrame } from "@react-three/fiber";
 
 export default function Model(props) {
   const { nodes, materials } = useGLTF("/models/scene_4.glb");
-  const scene_4 = useKTX2Texture("/textures/scene_4.ktx2");
+  const scene_4 = useKTX2Texture("/textures/scene_4.ktx2?v=4");
 
   const ghostRef = useRef();
   const zombieHandRef = useRef();

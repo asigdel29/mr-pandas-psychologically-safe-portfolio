@@ -14,7 +14,7 @@ export default function Model({ scrollProgress, ...props }) {
   const { nodes, materials } = useGLTF("/models/single_sheet.glb");
 
   const singlesheet = useKTX2Texture("/textures/single_sheet.ktx2");
-  const kpop = useKTX2Texture("/textures/kpop.ktx2");
+  const kpop = useKTX2Texture("/textures/kpop.ktx2?v=2");
 
   const kpopRumiRef = useRef();
   const kpopSignRef = useRef();

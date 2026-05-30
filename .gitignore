@@ -22,3 +22,14 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# texture pipeline artifacts (regenerable from public/textures via art-src/ktx_tools.py)
+art-src/**/*.png
+art-src/**/*.ktx2
+art-src/**/*.astc
+art-src/**/*.dds
+art-src/**/*.basis
+
+# python bytecode
+art-src/**/__pycache__/
+*.pyc

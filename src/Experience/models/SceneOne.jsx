@@ -48,13 +48,13 @@ export default function Model(props) {
   const waterfallone = useKTX2Texture("/textures/waterfall_one.ktx2");
   const waterfalltwo = useKTX2Texture("/textures/waterfall_two.ktx2");
   const not_waterfall = useKTX2Texture(
-    "/textures/not_waterfall.ktx2",
+    "/textures/not_waterfall.ktx2?v=3",
     true,
     0.6,
     "double"
   );
-  const scene_1_bg = useKTX2Texture("/textures/scene_1_bg.ktx2");
-  const scene_1 = useKTX2Texture("/textures/scene_1.ktx2");
+  const scene_1_bg = useKTX2Texture("/textures/scene_1_bg.ktx2?v=2");
+  const scene_1 = useKTX2Texture("/textures/scene_1.ktx2?v=2");
 
   useFrame((state) => {
     const t = state.clock.elapsedTime;

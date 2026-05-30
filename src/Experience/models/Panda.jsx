@@ -12,7 +12,7 @@ import {
 
 export default function Model({ scrollProgress, cameraScrollCurve, ...props }) {
   const { nodes, materials } = useGLTF("/models/Panda.glb");
-  const regular = useKTX2Texture("/textures/regular.ktx2");
+  const regular = useKTX2Texture("/textures/regular.ktx2?v=2");
   const samurai = useKTX2Texture("/textures/samurai.ktx2");
   const pirate = useKTX2Texture("/textures/pirate.ktx2");
   const desert = useKTX2Texture("/textures/desert.ktx2");

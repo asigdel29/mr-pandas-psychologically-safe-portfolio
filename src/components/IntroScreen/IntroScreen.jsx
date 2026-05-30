@@ -33,7 +33,7 @@ const IntroScreen = () => {
       <div ref={introRef} className={styles.introScreen}>
         <div className={styles.introScreenContent}>
           <div>
-            <br /> 🐼 scroll/drag up/down to navigate!! 😊
+            <br /> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           </div>
 
           <div className={styles.progressBarContainer}>
@@ -59,7 +59,7 @@ const IntroScreen = () => {
             // textDecoration: "none",
           }}
         >
-          Watch tutorial here!!
+          Lorem ipsum dolor
         </a>
         <a
           href="https://github.com/andrewwoan/mr-pandas-psychologically-safe-portfolio"
@@ -76,7 +76,7 @@ const IntroScreen = () => {
             // textDecoration: "none",
           }}
         >
-          See full list of credits here!!
+          Lorem ipsum sit amet
         </a>
       </div>
     </>

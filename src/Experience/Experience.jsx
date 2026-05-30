@@ -118,6 +118,7 @@ const Experience = () => {
       }}
       style={{ width: "100vw", height: "100vh" }}
     >
+      <color attach="background" args={["#cfe3ff"]} />
       <Scene
         cameraGroup={cameraGroup}
         camera={camera}

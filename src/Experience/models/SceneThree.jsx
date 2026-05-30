@@ -26,7 +26,7 @@ export default function Model({ scrollProgress, ...props }) {
 
   const lerpFactor = 0.08;
 
-  const scene_3 = useKTX2Texture("/textures/scene_3.ktx2");
+  const scene_3 = useKTX2Texture("/textures/scene_3.ktx2?v=6");
 
   useFrame(() => {
     if (pyramidDoorRef.current) {
