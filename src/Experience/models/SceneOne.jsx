@@ -48,7 +48,7 @@ export default function Model(props) {
   const waterfallone = useKTX2Texture("/textures/waterfall_one.ktx2");
   const waterfalltwo = useKTX2Texture("/textures/waterfall_two.ktx2");
   const not_waterfall = useKTX2Texture(
-    "/textures/not_waterfall.ktx2?v=9",
+    "/textures/not_waterfall.ktx2?v=10",
     true,
     0.6,
     "double"
