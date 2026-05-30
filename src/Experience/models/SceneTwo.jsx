@@ -10,7 +10,7 @@ import { useFrame } from "@react-three/fiber";
 export default function Model(props) {
   const { nodes, materials } = useGLTF("/models/scene_2.glb");
 
-  const scene_2 = useKTX2Texture("/textures/scene_2.ktx2");
+  const scene_2 = useKTX2Texture("/textures/scene_2.ktx2?v=3");
 
   const oceanOne = useRef();
   const oceanTwo = useRef();
@@ -56,7 +56,9 @@ export default function Model(props) {
         position={[0.526, 4.236, -2.334]}
         rotation={[Math.PI / 2, 0.023, 0]}
       />
+      {/* sandy island mound -> hidden (verify vs floor; revert if it's water) */}
       <mesh
+        visible={false}
         geometry={nodes.Plane018.geometry}
         material={scene_2}
         position={[2.426, 3.171, -2.186]}
@@ -91,13 +93,16 @@ export default function Model(props) {
         rotation={[Math.PI / 2, -0.136, 0]}
         scale={0.717}
       />
+      {/* palm tree -> hidden (Nepal is landlocked, no pirate island) */}
       <mesh
+        visible={false}
         geometry={nodes.Plane026.geometry}
         material={scene_2}
         position={[3.313, 2.244, -2.137]}
         rotation={[Math.PI / 2, -0.124, 0]}
       />
       <group
+        visible={false}
         ref={treasureChestTopGroupRef}
         onPointerEnter={() => (treasureChestHovered.current = true)}
         onPointerLeave={() => (treasureChestHovered.current = false)}

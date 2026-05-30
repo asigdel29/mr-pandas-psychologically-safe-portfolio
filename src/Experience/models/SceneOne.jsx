@@ -48,13 +48,28 @@ export default function Model(props) {
   const waterfallone = useKTX2Texture("/textures/waterfall_one.ktx2");
   const waterfalltwo = useKTX2Texture("/textures/waterfall_two.ktx2");
   const not_waterfall = useKTX2Texture(
-    "/textures/not_waterfall.ktx2?v=3",
+    "/textures/not_waterfall.ktx2?v=9",
     true,
     0.6,
     "double"
   );
-  const scene_1_bg = useKTX2Texture("/textures/scene_1_bg.ktx2?v=2");
-  const scene_1 = useKTX2Texture("/textures/scene_1.ktx2?v=2");
+  const scene_1_bg = useKTX2Texture("/textures/scene_1_bg.ktx2?v=3");
+  const scene_1 = useKTX2Texture("/textures/scene_1.ktx2?v=7");
+  // The old Chinese dragon is hidden (see the dragon meshes below); a Tibetan
+  // prayer-flag garland takes its place across the sky.
+  const prayerFlags = useKTX2Texture(
+    "/textures/prayer_flags.ktx2?v=3",
+    true,
+    0.5,
+    "double"
+  );
+  // Himalayan range across the backdrop, behind the scenery.
+  const mountains = useKTX2Texture(
+    "/textures/mountains.ktx2?v=1",
+    true,
+    0.5,
+    "double"
+  );
 
   useFrame((state) => {
     const t = state.clock.elapsedTime;
@@ -113,7 +128,9 @@ export default function Model(props) {
 
   return (
     <group {...props} dispose={null}>
+      {/* Chinese dragon -> hidden, replaced by the prayer-flag garland below */}
       <mesh
+        visible={false}
         geometry={nodes.Plane029.geometry}
         material={scene_1}
         position={[-3.042, 3.941, -2.322]}
@@ -121,6 +138,7 @@ export default function Model(props) {
       />
       <mesh
         ref={dragonHead}
+        visible={false}
         geometry={nodes.Plane037.geometry}
         material={scene_1}
         position={[-5.243, 4.082, -2.267]}
@@ -128,6 +146,7 @@ export default function Model(props) {
       />
       <mesh
         ref={dragonLegFrontLeft}
+        visible={false}
         geometry={nodes.Plane089.geometry}
         material={scene_1}
         position={[-3.93, 3.518, -2.266]}
@@ -135,13 +154,25 @@ export default function Model(props) {
       />
       <mesh
         ref={dragonLegFrontRight}
+        visible={false}
         geometry={nodes.Plane090.geometry}
         material={scene_1}
         position={[-3.974, 3.587, -2.409]}
         rotation={[Math.PI / 2, -0.19, 0]}
       />
+      {/* Tibetan prayer-flag garland strung left-to-right across the range.
+          scale-y is flipped because KTX2 textures sample inverted on a raw
+          planeGeometry. */}
+      <mesh
+        material={prayerFlags}
+        position={[-6, 2.8, -2.5]}
+        scale={[1, -1, 1]}
+      >
+        <planeGeometry args={[12, 1.9]} />
+      </mesh>
       <mesh
         ref={mrsPandaRef}
+        visible={false}
         geometry={nodes.Plane116.geometry}
         material={scene_1}
         position={[-5.746, 0.854, -2.671]}
@@ -157,6 +188,7 @@ export default function Model(props) {
       />
       <mesh
         ref={dragonLegBackLeft}
+        visible={false}
         geometry={nodes.Plane129.geometry}
         material={scene_1}
         position={[-2.078, 3.564, -2.266]}
@@ -164,6 +196,7 @@ export default function Model(props) {
       />
       <mesh
         ref={dragonLegBackRight}
+        visible={false}
         geometry={nodes.Plane130.geometry}
         material={scene_1}
         position={[-2.121, 3.596, -2.451]}
@@ -252,6 +285,16 @@ export default function Model(props) {
         position={[-5.192, 0.585, -0.816]}
         rotation={[Math.PI / 2, -0.102, 0]}
       />
+      {/* Himalayan backdrop range, behind the scenery. scale-y flipped (KTX2
+          samples inverted on a raw planeGeometry). */}
+      <mesh
+        material={mountains}
+        position={[-7, 1.1, -2.71]}
+        scale={[1, -1, 1]}
+        renderOrder={-1}
+      >
+        <planeGeometry args={[20, 5]} />
+      </mesh>
       <mesh
         geometry={nodes["First_Scene_-_Bg"].geometry}
         material={scene_1_bg}

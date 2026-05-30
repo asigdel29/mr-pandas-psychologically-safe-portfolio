@@ -33,3 +33,9 @@ art-src/**/*.basis
 # python bytecode
 art-src/**/__pycache__/
 *.pyc
+
+# basisu unpack/transcode scratch dumps (never commit)
+*_transcoded_*
+*_unpacked_*
+*.astc
+*.dds
