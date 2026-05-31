@@ -53,7 +53,7 @@ export default function Model(props) {
     0.6,
     "double"
   );
-  const scene_1_bg = useKTX2Texture("/textures/scene_1_bg.ktx2?v=4");
+  const scene_1_bg = useKTX2Texture("/textures/scene_1_bg.ktx2?v=5");
   const scene_1 = useKTX2Texture("/textures/scene_1.ktx2?v=7");
   // The old Chinese dragon is hidden (see the dragon meshes below); a Tibetan
   // prayer-flag garland takes its place across the sky.

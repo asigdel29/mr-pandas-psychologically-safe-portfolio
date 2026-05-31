@@ -51,6 +51,55 @@ def _classify(arr):
     return shadow, green, bright_wall
 
 
+# The dragon also cast a soft shadow onto the GREEN GROUND (a diffuse darkening
+# of the grass in the upper ground bands, not the bright foreground lawn). We
+# clean it by comparing each green pixel to its column's BRIGHT-grass reference
+# and refilling the darkened ones with that reference -- so we only ever touch
+# genuinely-shadowed grass and we preserve the per-column ruling tone. Bounded
+# to the upper ground bands (y<GROUND_Y_MAX) so the big foreground lawn, whose
+# natural variation overlaps the shadow luminance, is never flattened.
+GROUND_Y_MAX = 2350
+GROUND_DELTA = 26          # a green px this much darker than its column ref = shadow
+
+
+def clean_ground_shadow(arr):
+    rgb = arr[..., :3]
+    a = arr[..., 3]
+    R = rgb[..., 0].astype(int)
+    G = rgb[..., 1].astype(int)
+    B = rgb[..., 2].astype(int)
+    lum = rgb.mean(2)
+    green = (a > 120) & (G - R > 8) & (G - B > 8)
+    region = np.zeros(arr.shape[:2], bool)
+    region[:GROUND_Y_MAX, :] = True
+    grass = green & region
+    bright = grass & (lum > 160)
+
+    # Global clean-grass reference: the median of all bright grass in the band.
+    # Used wherever a column is so deep in shadow it has no bright grass of its
+    # own to sample (the dense core of the dragon's cast shadow).
+    if bright.sum() < 200:
+        return 0
+    gref = np.median(rgb[bright], axis=0)
+    gref_lum = float(gref.mean())
+
+    filled = 0
+    cols = np.where(grass.any(axis=0))[0]
+    for x in cols:
+        bcol = bright[:, x]
+        if bcol.sum() >= 12:                # trust this column's own clean grass
+            ref = np.median(rgb[bcol, x], axis=0)
+        else:                               # column is fully shadowed -> global
+            ref = gref
+        ref_lum = float(ref.mean())
+        col = grass[:, x]
+        shad = col & (lum[:, x] < ref_lum - GROUND_DELTA) & (lum[:, x] > 40)
+        if shad.any():
+            rgb[shad, x] = ref.astype(np.uint8)
+            filled += int(shad.sum())
+    return filled
+
+
 def main() -> int:
     # Always start from the PRISTINE atlas so re-runs don't stack re-encodes.
     out = "/private/tmp/_bg.png"
@@ -91,6 +140,9 @@ def main() -> int:
                 med = np.array(WALL_FALLBACK, np.uint8)
             rgb[y][srow] = med
 
+    # Clean the dragon's soft shadow off the upper green ground too.
+    ground_filled = clean_ground_shadow(arr)
+
     Image.fromarray(arr, "RGBA").save(out)
     ktx_tools.encode(out, TEX)
 
@@ -100,7 +152,9 @@ def main() -> int:
     os.remove(out)
     print(f"shadow_before={shadow_before} shadow_after={int(shadow_after.sum())}")
     print(f"green_before={green_before} green_after={int(green_after.sum())} "
-          f"(must be ~equal -> ground untouched)")
+          f"(must be ~equal -> ground silhouette preserved)")
+    print(f"ground_shadow_px_filled={ground_filled} "
+          f"(grass darkened by the dragon shadow, refilled with clean grass)")
     return 0
 
 
