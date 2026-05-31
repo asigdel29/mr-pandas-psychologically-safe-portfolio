@@ -39,3 +39,4 @@ art-src/**/__pycache__/
 *_unpacked_*
 *.astc
 *.dds
+.vercel
