@@ -33,7 +33,7 @@ const IntroScreen = () => {
       <div ref={introRef} className={styles.introScreen}>
         <div className={styles.introScreenContent}>
           <div>
-            <br /> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            <br /> hi, i'm anu :D scroll/drag up/down to explore!
           </div>
 
           <div className={styles.progressBarContainer}>
